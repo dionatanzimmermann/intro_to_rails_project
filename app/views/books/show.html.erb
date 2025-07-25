@@ -39,6 +39,19 @@
           <% end %>
         </div>
       </div>
+
+      <div class="card mt-4">
+        <div class="card-body">
+          <%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-outline-secondary' %>  <%= link_to 'Back', books_path, class: 'btn btn-outline-primary' %>
+          <%= form_with(url: book_path(@book), method: :delete, class: "d-inline") do %>
+            <%= button_tag "Delete",
+                    type: "submit",
+                    class: "btn btn-danger",
+                    onclick: "return confirm('Are you sure?')" %>
+            <% end %>
+        </div>
+      </div>
+
     </div>
 
     <div class="col-md-4">

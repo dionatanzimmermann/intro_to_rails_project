@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   resources :genres
 
-  resources :books, only: [:index, :show] do
-    resources :reviews, only: [:index]
+  resources :books, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :reviews, only: [:index, :create]
   end
 
   resources :reviews, only: [:index]
