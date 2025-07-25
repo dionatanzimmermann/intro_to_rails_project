@@ -7,6 +7,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @reviews = @book.reviews.includes(:user).order(created_at: :desc)
     @reviews = @book.reviews.includes(:user).page(params[:page]).per(5)
+    @review = Review.new
   end
 end
