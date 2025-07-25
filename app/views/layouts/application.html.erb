@@ -28,6 +28,12 @@
   </nav>
 
   <div class="container mt-4">
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-<%= type == 'notice' ? 'success' : 'danger' %> alert-dismissible fade show">
+        <%= msg %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% end %>
     <%= yield %>
   </div>
 

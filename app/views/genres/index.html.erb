@@ -1,8 +1,33 @@
-<div class="container mt-5">
-  <h1>All Genres</h1>
-  <div class="list-group">
-    <% @genres.each do |genre| %>
-      <%= link_to genre.name, genre_path(genre), class: "list-group-item list-group-item-action" %>
-    <% end %>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>All Genres</h1>
+    <%= link_to 'New Genre', new_genre_path, class: 'btn btn-primary' %>
   </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @genres.each do |genre| %>
+        <tr>
+          <td><%= link_to genre.name, genre_path(genre), style: "text-decoration: none; color: inherit;" %></td>
+          <td><%= truncate(genre.description, length: 50) %></td>
+          <td>
+            <%= link_to 'Edit', edit_genre_path(genre), class: 'btn btn-sm btn-outline-secondary' %>
+            <%= form_with(url: genre_path(genre), method: :delete, class: "d-inline") do %>
+              <%= button_tag "Delete",
+                  type: "submit",
+                  class: "btn btn-danger btn-sm",
+                  onclick: "return confirm('Are you sure?')" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

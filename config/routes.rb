@@ -3,9 +3,7 @@ Rails.application.routes.draw do
 
   get 'about', to: 'pages#about'
 
-  resources :genres, only: [:index, :show] do
-    resources :books, only: [:index]
-  end
+  resources :genres
 
   resources :books, only: [:index, :show] do
     resources :reviews, only: [:index]
