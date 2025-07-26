@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :create]
   end
 
+  resources :books do
+    resources :reviews, except: [:index, :show]
+  end
+
   resources :reviews, only: [:index]
 
 

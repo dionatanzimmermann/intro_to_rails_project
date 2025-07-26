@@ -21,16 +21,30 @@
           <h4 class="mb-0">Reviews</h4>
         </div>
         <div class="card-body">
-          <% if @reviews.empty? %>
+          <% if @book.reviews.empty? %>
             <p>No reviews yet. Be the first to review!</p>
           <% else %>
-            <% @reviews.each do |review| %>
-              <div class="mb-3 pb-3 border-bottom">
-                <strong><%= review.user.username %></strong>
-                <div class="text-warning">
-                  <% review.rating.times do %>★<% end %>
+            <% @book.reviews.each do |review| %>
+              <div class="mb-4 pb-3 border-bottom">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <div>
+                    <strong><%= review.user.username %></strong>
+                    <div class="text-warning">
+                      <% review.rating.times do %>★<% end %>
+                    </div>
+                  </div>
+
+                  <div class="d-flex gap-2">  <!-- Added gap between buttons -->
+                    <%= link_to 'Edit', edit_book_review_path(@book, review),
+                                class: 'btn btn-sm btn-outline-secondary px-3' %>
+                    <%= button_to 'Delete', book_review_path(@book, review),
+                                method: :delete,
+                                class: 'btn btn-sm btn-outline-danger px-3',
+                                form: { data: { turbo_confirm: 'Are you sure?' } } %>
+                  </div>
                 </div>
-                <p><%= review.content %></p>
+
+                <p class="mb-2"><%= review.content %></p>
                 <small class="text-muted">
                   <%= time_ago_in_words(review.created_at) %> ago
                 </small>
@@ -60,7 +74,7 @@
           <h4 class="mb-0">Add Your Review</h4>
         </div>
         <div class="card-body">
-
+          <%= render 'reviews/form', book: @book, review: @review || @book.reviews.new %>
         </div>
       </div>
     </div>
