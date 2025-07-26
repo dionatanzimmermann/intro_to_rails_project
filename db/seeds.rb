@@ -23,7 +23,7 @@ end
 
 # 2. Seed Books from Open Library API
 genres = Genre.all
-(1..5).each do |i|
+(1..15).each do |i|
   response = HTTParty.get("https://openlibrary.org/search.json?q=#{Faker::Book.genre.downcase.gsub(' ', '+')}&limit=10&page=#{i}")
   books_data = JSON.parse(response.body)['docs']
 

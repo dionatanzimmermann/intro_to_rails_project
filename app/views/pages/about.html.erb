@@ -9,16 +9,92 @@
       <p>Provides book metadata including:</p>
       <ul>
         <li>Titles</li>
-        <li>Authors</li>
-        <li>Publication years</li>
-        <li>ISBNs</li>
+        <li>Authors (with multiple author support)</li>
+        <li>First publication years</li>
+        <li>ISBN identifiers</li>
+        <li>Subject classifications</li>
       </ul>
+      <p class="text-muted mt-2">Data is fetched as JSON and transformed to match our database structure.</p>
     </div>
   </div>
 
-  <!-- Repeat for other data sources -->
+  <div class="card mt-4">
+    <div class="card-header">
+      <h2>Custom Genres Dataset</h2>
+    </div>
+    <div class="card-body">
+      <p>Our curated collection of book genres:</p>
+      <ul>
+        <li>20+ literary genres</li>
+        <li>Standardized naming conventions</li>
+        <li>Descriptive summaries for each genre</li>
+      </ul>
+      <p class="text-muted mt-2">Imported via CSV during database seeding.</p>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-header">
+      <h2>User Contributions</h2>
+    </div>
+    <div class="card-body">
+      <p>Community-generated content including:</p>
+      <ul>
+        <li>User accounts and profiles</li>
+        <li>Book ratings (1-5 stars)</li>
+        <li>Detailed review texts</li>
+      </ul>
+      <p class="text-muted mt-2">Stored in our PostgreSQL database with proper associations.</p>
+    </div>
+  </div>
 
   <div class="mt-4">
     <h2>Database Schema</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>Table</th>
+            <th>Key Fields</th>
+            <th>Relationships</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>books</code></td>
+            <td>title, author, published_year, isbn, description</td>
+            <td>belongs_to :genre</td>
+          </tr>
+          <tr>
+            <td><code>genres</code></td>
+            <td>name, description</td>
+            <td>has_many :books</td>
+          </tr>
+          <tr>
+            <td><code>users</code></td>
+            <td>username, email</td>
+            <td>has_many :reviews</td>
+          </tr>
+          <tr>
+            <td><code>reviews</code></td>
+            <td>rating, content</td>
+            <td>belongs_to :book, :user</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-muted mt-2">All tables include standard Rails timestamps (created_at, updated_at).</p>
+  </div>
+
+  <div class="card mt-4 border-primary">
+    <div class="card-body">
+      <h3 class="text-primary">Data Integration</h3>
+      <p>Our system combines these datasets through:</p>
+      <ul>
+        <li>Foreign key relationships in the database</li>
+        <li>Batch processing during seeding</li>
+        <li>User-friendly forms for community contributions</li>
+      </ul>
+    </div>
   </div>
 </div>
