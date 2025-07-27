@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h1>User Profile</h1>
+    </div>
+    <div class="card-body">
+      <dl class="row">
+        <dt class="col-sm-3">Username:</dt>
+        <dd class="col-sm-9"><%= @user.username %></dd>
+
+        <dt class="col-sm-3">Email:</dt>
+        <dd class="col-sm-9"><%= @user.email %></dd>
+
+        <% if @user.reviews.any? %>
+          <dt class="col-sm-3">Reviews:</dt>
+          <dd class="col-sm-9">
+            <ul class="list-unstyled">
+              <% @user.reviews.each do |review| %>
+                <li class="mb-2">
+                  <strong><%= review.book.title %></strong>
+                  <div class="text-warning">
+                    <% review.rating.times do %>★<% end %>
+                  </div>
+                  <p><%= review.content %></p>
+                </li>
+              <% end %>
+            </ul>
+          </dd>
+        <% end %>
+      </dl>
+
+      <%= link_to 'Back to Users', users_path, class: 'btn btn-outline-secondary' %>
+    </div>
+  </div>
+</div>
