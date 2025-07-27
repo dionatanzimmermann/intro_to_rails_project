@@ -18,6 +18,12 @@
           <td>
             <%= link_to 'Show', user, class: 'btn btn-sm btn-outline-primary' %>
             <%= link_to 'Edit', edit_user_path(user), class: 'btn btn-sm btn-outline-secondary' %>
+            <%= form_with(url: user_path(user), method: :delete, class: "d-inline") do %>
+              <%= button_tag "Delete",
+                  type: "submit",
+                  class: "btn btn-danger btn-sm",
+                  onclick: "return confirm('Are you sure?')" %>
+            <% end %>
           </td>
         </tr>
       <% end %>
