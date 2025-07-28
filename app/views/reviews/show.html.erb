@@ -1,0 +1,28 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h1>Review Details</h1>
+    </div>
+    <div class="card-body">
+      <dl class="row">
+        <dt class="col-sm-3">Book:</dt>
+        <dd class="col-sm-9"><%= @review.book.title %></dd>
+
+        <dt class="col-sm-3">User:</dt>
+        <dd class="col-sm-9"><%= @review.user.username %></dd>
+
+        <dt class="col-sm-3">Rating:</dt>
+        <dd class="col-sm-9">
+          <div class="text-warning">
+            <% @review.rating.times do %>★<% end %>
+          </div>
+        </dd>
+
+        <dt class="col-sm-3">Review:</dt>
+        <dd class="col-sm-9"><%= @review.content %></dd>
+      </dl>
+
+      <%= link_to 'Back to Book', book_path(@review.book), class: 'btn btn-outline-primary' %>
+    </div>
+  </div>
+</div>

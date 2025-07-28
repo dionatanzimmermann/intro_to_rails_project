@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :books do
-    resources :reviews, except: [:index, :show]
+    resources :reviews, only: [:create, :show]
   end
 
   resources :reviews, only: [:index]

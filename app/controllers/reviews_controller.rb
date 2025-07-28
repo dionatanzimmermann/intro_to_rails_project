@@ -2,6 +2,10 @@ class ReviewsController < ApplicationController
   before_action :set_book
   before_action :set_review, only: [:edit, :update, :destroy]
 
+  def show
+    @review = Review.includes(:book, :user).find(params[:id])
+  end
+
   def create
     @review = @book.reviews.new(review_params)
     @review.user = User.first

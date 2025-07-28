@@ -29,6 +29,7 @@
                 <div class="d-flex justify-content-between align-items-start mb-2">
                   <div>
                     <strong><%= review.user.username %></strong>
+                    <strong><%= link_to review.user.username, book_review_path(@book, review), class: 'text-decoration-none' %></strong>
                     <div class="text-warning">
                       <% review.rating.times do %>★<% end %>
                     </div>
